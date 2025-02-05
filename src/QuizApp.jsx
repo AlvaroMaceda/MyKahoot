@@ -24,7 +24,7 @@ const DELAY = 3000
 const QuizApp = () => {
   const [questions, setQuestions] = useState([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  const [selectedAnswers, setSelectedAnswers] = useState([])
+  // const [selectedAnswers, setSelectedAnswers] = useState([])
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [isCorrect, setIsCorrect] = useState(null)
 
@@ -52,7 +52,7 @@ const QuizApp = () => {
     const correctAnswers = questions[currentQuestionIndex].correctAnswers
     const isAnswerCorrect = correctAnswers.includes(index + 1)
     setIsCorrect(isAnswerCorrect)
-    setSelectedAnswers((prev) => [...prev, index + 1])
+    // setSelectedAnswers((prev) => [...prev, index + 1])
 
     console.log('Setting timeout for', DELAY, 'milliseconds')
     setTimeout(() => {
