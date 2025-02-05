@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Card from './Card.jsx'
 import CardContent from './CardContent.jsx'
 import Button from './components/Button.jsx'
+import './QuizApp.css' // Import the custom CSS file
 
 // Función para parsear una fila CSV teniendo en cuenta las comas dentro de campos entre comillas
 function parseCSVRow(row) {
@@ -75,19 +76,19 @@ const QuizApp = () => {
   }
 
   return (
-    <div className="p-4 max-w-xl mx-auto">
+    <div className="quiz-container">
       {!quizCompleted ? (
         questions.length > 0 && (
           <Card>
-            <CardContent className="p-4">
-              <h2 className="text-xl font-bold mb-4">
+            <CardContent className="card-content">
+              <h2 className="question-title">
                 {questions[currentQuestionIndex].question}
               </h2>
-              <div className="space-y-2">
+              <div className="answers-grid">
                 {questions[currentQuestionIndex].answers.map((answer, index) => (
                   <Button
                     key={index}
-                    className="w-full"
+                    className="answer-button"
                     onClick={() => handleAnswerClick(index)}
                   >
                     {answer}
@@ -96,10 +97,10 @@ const QuizApp = () => {
               </div>
               {isCorrect !== null && (
                 <>
-                  <p className={`mt-4 ${isCorrect ? 'text-green-500' : 'text-red-500'}`}>
+                  <p className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
                     {isCorrect ? '¡Respuesta correcta!' : 'Respuesta incorrecta'}
                   </p>
-                  <Button className="mt-4 w-full" onClick={handleNextQuestion}>
+                  <Button className="next-button" onClick={handleNextQuestion}>
                     Siguiente pregunta
                   </Button>
                 </>
@@ -108,7 +109,7 @@ const QuizApp = () => {
           </Card>
         )
       ) : (
-        <h2 className="text-xl font-bold text-center">Quiz completado!</h2>
+        <h2 className="quiz-completed">Quiz completado!</h2>
       )}
     </div>
   )
