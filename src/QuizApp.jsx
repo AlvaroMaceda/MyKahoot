@@ -1,6 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import Card from './Card.jsx'
+import CardContent from './CardContent.jsx'
+import Button from './components/Button.jsx'
+
+// Función para parsear una fila CSV teniendo en cuenta las comas dentro de campos entre comillas
+function parseCSVRow(row) {
+  const regex = /"(.*?)"|([^",\n]+)(?=\s*,|\s*$)/g;
+  const result = [];
+  let match;
+
+  // Busca todos los valores entre comillas o los valores sin comillas
+  while ((match = regex.exec(row)) !== null) {
+    result.push(match[1] ? match[1] : match[2]);
+  }
+
+  return result;
+}
+
 
 const QuizApp = () => {
   const [questions, setQuestions] = useState([]);
@@ -9,18 +25,23 @@ const QuizApp = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
 
   useEffect(() => {
-    fetch("/path-to-your-csv-file.csv")
-      .then((response) => response.text())
-      .then((data) => {
-        const rows = data.split("\n").map((row) => row.split("\t"));
-        const parsedQuestions = rows.slice(1).map((row) => ({
+    const fetchQuestions = async () => {
+      const response = await fetch("/clima.csv");
+      const data = await response.text();
+      const rows = data.split("\n").filter(row => row.trim() !== "").map(parseCSVRow);
+      const parsedQuestions = rows.slice(1).map((row) => {
+        console.log(row);
+        return ({
           question: row[0],
           answers: row.slice(1, 5),
           timeLimit: parseInt(row[5], 10),
           correctAnswers: row[6].split(",").map(Number),
-        }));
-        setQuestions(parsedQuestions);
+        })
       });
+      setQuestions(parsedQuestions);
+    };
+
+    fetchQuestions();
   }, []);
 
   const handleAnswerClick = (index) => {
