@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import Card from './Card.jsx'
 import CardContent from './CardContent.jsx'
 import Button from './components/Button.jsx'
@@ -19,14 +19,16 @@ function parseCSVRow(row) {
 }
 
 
-const DELAY = 3000
+const DELAY = 30000
 
 const QuizApp = () => {
+
   const [questions, setQuestions] = useState([])
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
-  // const [selectedAnswers, setSelectedAnswers] = useState([])
+  const [selectedAnswers, setSelectedAnswers] = useState([])
   const [quizCompleted, setQuizCompleted] = useState(false)
   const [isCorrect, setIsCorrect] = useState(null)
+  const [isAnswered, setIsAnswered] = useState(false)
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -48,21 +50,22 @@ const QuizApp = () => {
   }, [])
 
   const handleAnswerClick = (index) => {
-    console.log('CLICK')
+    // if(isAnswered) return
+
     const correctAnswers = questions[currentQuestionIndex].correctAnswers
     const isAnswerCorrect = correctAnswers.includes(index + 1)
     setIsCorrect(isAnswerCorrect)
-    // setSelectedAnswers((prev) => [...prev, index + 1])
+    setSelectedAnswers((prev) => [...prev, index + 1])
+    setIsAnswered(true)
 
-    console.log('Setting timeout for', DELAY, 'milliseconds')
     setTimeout(() => {
-      console.log('TIMEOUT')
       if (currentQuestionIndex < questions.length - 1) {
         setCurrentQuestionIndex((prev) => prev + 1)
       } else {
         setQuizCompleted(true)
       }
       setIsCorrect(null)
+      setIsAnswered(false)
     }, DELAY)
   }
 
@@ -75,6 +78,7 @@ const QuizApp = () => {
     setIsCorrect(null)
   }
 
+
   return (
     <div className="quiz-container">
       {!quizCompleted ? (
@@ -85,15 +89,21 @@ const QuizApp = () => {
                 {questions[currentQuestionIndex].question}
               </h2>
               <div className="answers-grid">
-                {questions[currentQuestionIndex].answers.map((answer, index) => (
-                  <Button
-                    key={index}
-                    className="answer-button"
-                    onClick={() => handleAnswerClick(index)}
-                  >
-                    {answer}
-                  </Button>
-                ))}
+                {questions[currentQuestionIndex].answers.map((answer, index) => {
+                  const isCorrect = questions[currentQuestionIndex].correctAnswers.includes(index + 1)
+                  const isSelectedAnswer = selectedAnswers[currentQuestionIndex] === index + 1
+                  const classToApply = isSelectedAnswer ? (isCorrect ? 'correct' : 'incorrect') : ''
+                  return (
+                      <Button
+                        key={index}
+                        className={"answer-button " + classToApply}
+                        onClick={() => handleAnswerClick(index)}
+                      >
+                        {answer} {selectedAnswers[currentQuestionIndex] == index +1}
+                      </Button>
+                   )
+                  })
+                }
               </div>
               {isCorrect !== null && (
                 <>
