@@ -19,7 +19,7 @@ function parseCSVRow(row) {
 }
 
 
-const DELAY = 30000
+const DELAY = 3000
 
 const QuizApp = () => {
 
