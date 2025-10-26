@@ -1,6 +1,6 @@
 import './App.css'
-import TestList from './TestsList'
-import UploadTest from './UploadTest'
+import TestList from './Home/TestsList'
+import UploadTest from './Home/UploadTest'
 
 function App() {
 
