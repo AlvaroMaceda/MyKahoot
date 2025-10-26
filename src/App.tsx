@@ -1,14 +1,14 @@
 import './App.css'
-import TestList from './Home/TestsList'
-import UploadTest from './Home/UploadTest'
+import QuizList from './Home/QuizList'
+import UploadQuiz from './Home/UploadQuiz'
 
 function App() {
 
   return (
     <div className="container">
 
-      <UploadTest />
-      <TestList />
+      <UploadQuiz />
+      <QuizList />
 
     </div>
   )

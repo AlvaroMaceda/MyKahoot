@@ -1,11 +1,11 @@
-type TestItemProps = {
+type QuizListItemProps = {
   id: string,
   name: string,
   onDownload?: () => void,
   onDelete?: () => void,
 }
 
-function TestItem({ name, onDownload, onDelete }: TestItemProps) {
+function QuizListItem({ name, onDownload, onDelete }: QuizListItemProps) {
   return (
     <div className="test-card">
       <span className="test-name">{name}</span>
@@ -17,4 +17,4 @@ function TestItem({ name, onDownload, onDelete }: TestItemProps) {
   )
 }
 
-export default TestItem
+export default QuizListItem

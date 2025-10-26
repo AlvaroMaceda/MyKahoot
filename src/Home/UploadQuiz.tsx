@@ -1,5 +1,5 @@
 
-function UploadTest() {
+function UploadQuiz() {
   return (
     <div>
       <h2 className="csv-label">Sube un fichero CSV:</h2>
@@ -8,4 +8,4 @@ function UploadTest() {
   )
 }
 
-  export default UploadTest
+  export default UploadQuiz
