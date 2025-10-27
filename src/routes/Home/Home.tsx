@@ -1,3 +1,5 @@
+import './Home.css'
+
 import QuizList from './QuizList'
 import UploadQuiz from './UploadQuiz'
 

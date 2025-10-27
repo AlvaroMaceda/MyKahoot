@@ -20,10 +20,28 @@
   background: #fafafa;
 }
 
+.process-btn {
+  padding: 0.6rem 1.5rem;
+  min-height: 2.5rem;
+  background: #10b981;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.15);
+  transition: background 0.2s, transform 0.1s;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .help-btn {
   padding: 0.6rem 1.5rem;
   min-height: 2.5rem;
-  background: #1976d2;
+  background: #96b6d5;
   color: #fff;
   border: none;
   border-radius: 0.5rem;
