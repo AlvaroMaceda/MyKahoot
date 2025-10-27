@@ -9,7 +9,7 @@ function UploadQuiz() {
     <div id="upload-quiz-container">
       <h2 className="csv-label">Sube un fichero CSV</h2>
       <div className="upload">
-        <input type="file" accept=".csv" className="csv-input" />
+        <input className="csv-input"type="file" accept=".csv"  />
         <button className='help-btn' onClick={() => setShowHelp(true)}>formato</button>
       </div>
       <Modal open={showHelp} onClose={() => setShowHelp(false)}>
