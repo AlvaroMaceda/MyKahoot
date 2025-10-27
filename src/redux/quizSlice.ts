@@ -25,3 +25,5 @@ export const quizSlice = createSlice({
 
 
 export const selectQuizzes = (state: { quiz: AppState }) => state.quiz.quizzes
+export const selectLoading = (state: { quiz: AppState }) => state.quiz.loading
+export const selectError = (state: { quiz: AppState }) => state.quiz.error
