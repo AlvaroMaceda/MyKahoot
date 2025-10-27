@@ -3,6 +3,8 @@ import { createSlice } from '@reduxjs/toolkit'
 import type { Quiz } from '../types/quiz'
 import { loadQuizzesExtraReducers } from './loadQuizzesThunk'
 
+
+
 export type AppState = {
   quizzes: Quiz[]
   loading?: boolean
@@ -10,11 +12,7 @@ export type AppState = {
 }
 
 const INITIAL_STATE: AppState = {
-  quizzes: [
-    { id: '1', name: 'Sample Quiz 1' },
-    { id: '2', name: 'Sample Quiz 2' },
-    { id: '3', name: 'Sample Quiz 3' }
-  ],
+  quizzes: [],
 }
 
 export const quizSlice = createSlice({

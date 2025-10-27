@@ -1,6 +1,6 @@
 
 import { type IDBPDatabase } from 'idb'
-import type { Quiz } from '../types/quiz'
+import type { Quiz } from '../types/quizId'
 
 export function upgrade(db: IDBPDatabase, oldVersion: number, _newVersion: number | null, _transaction: IDBPDatabase['transaction']) {
   if (oldVersion < 1) {
