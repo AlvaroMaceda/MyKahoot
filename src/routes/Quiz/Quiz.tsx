@@ -1,8 +1,7 @@
 import { useParams } from 'react-router-dom'
 
-
 function Quiz() {
-    const { id, question } = useParams<{ id: string; question?: string }>()
+  const { id, question } = useParams<{ id: string; question?: string }>()
 
   return (
     <div>

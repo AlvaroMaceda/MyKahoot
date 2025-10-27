@@ -1,21 +1,16 @@
 // Example slice (replace with your own)
 import { createSlice } from '@reduxjs/toolkit'
 import type { Quiz } from '../types/quiz'
-import { dbPromise } from '../repository/db'
-import { QuizRepository } from '../repository/quizRepository'
+import { loadQuizzesExtraReducers } from './loadQuizzesThunk'
 
 export type AppState = {
   quizzes: Quiz[]
+  loading?: boolean
+  error?: string | null
 }
 
-const quizRepository = new QuizRepository(dbPromise)
-
 const INITIAL_STATE: AppState = {
-  quizzes: [
-    { id: '1', name: 'General Knowledge' },
-    { id: '2', name: 'Science Quiz' },
-    { id: '3', name: 'History Quiz' },
-  ],
+  quizzes: [],
 }
 
 export const quizSlice = createSlice({
@@ -23,6 +18,9 @@ export const quizSlice = createSlice({
   initialState: INITIAL_STATE,
   reducers: {
   },
+  extraReducers: (builder) => {
+    loadQuizzesExtraReducers(builder)
+  }
 })
 
 

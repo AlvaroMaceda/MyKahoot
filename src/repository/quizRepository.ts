@@ -28,22 +28,22 @@ export class QuizRepository {
     return this.db
   }
 
-  async addQuiz(quiz: Quiz) {
+  async add(quiz: Quiz) {
     const db = await this.getDb()
     await db.put('quizzes', quiz)
   }
 
-  async getQuizzes(): Promise<Quiz[]> {
+  async getAll(): Promise<Quiz[]> {
     const db = await this.getDb()
     return db.getAll('quizzes')
   }
 
-  async getQuizById(id: string): Promise<Quiz | undefined> {
+  async getById(id: string): Promise<Quiz | undefined> {
     const db = await this.getDb()
     return db.get('quizzes', id)
   }
 
-  async deleteQuiz(id: string) {
+  async delete(id: string) {
     const db = await this.getDb()
     await db.delete('quizzes', id)
   }

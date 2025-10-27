@@ -5,8 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
 
-import Home from './Home/Home'
-import Quiz from './Quiz/Quiz'
+import Home from './routes/Home/Home'
+import Quiz from './routes/Quiz/Quiz'
 
 const appRoutes = [
   { path: '/', element: <Home /> },
