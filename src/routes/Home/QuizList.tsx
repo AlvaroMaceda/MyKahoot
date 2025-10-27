@@ -27,12 +27,16 @@ function QuizList() {
 
   return (
     <>
+      { quizzes.length === 0 && !loading && !error && <div>No quizzes available</div>}
+      
+      { quizzes.length > 0 &&  (
       <div>
         <h3 className="existing-tests-label">Haz uno de los tests ya existentes</h3>
         <div className="tests-list">
           {quizzes.map(test => <QuizListItem key={test.id} id={test.id} name={test.name} />)}
         </div>
       </div>
+      )}
 
       <Loading visible={!!loading} />
       { error && <div className="error-message">{error}</div> }

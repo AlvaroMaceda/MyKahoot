@@ -1,0 +1,43 @@
+.upload {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.csv-label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.csv-input {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background: #fafafa;
+}
+
+.help-btn {
+  padding: 0.6rem 1.5rem;
+  min-height: 2.5rem;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(25, 118, 210, 0.15);
+  transition: background 0.2s, transform 0.1s;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.help-btn:hover,
+.help-btn:focus {
+  background: #1565c0;
+  transform: translateY(-2px) scale(1.05);
+}
