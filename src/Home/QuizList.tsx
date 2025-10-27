@@ -1,12 +1,9 @@
+import { useSelector } from "react-redux"
 import QuizListItem from "./QuizListItem"
+import { selectQuizzes } from "../redux/quizSlice"
 
 function QuizList() {
-  const quizzes = [
-    { id: '1', name: 'Test de Matemáticas' },
-    { id: '2', name: 'Test de Historia' },
-    { id: '3', name: 'Test de Bananas' },
-  ]
-
+  const quizzes = useSelector(selectQuizzes)
 
   return (
     <div>

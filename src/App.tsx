@@ -1,5 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+
+import { Provider } from 'react-redux'
+import { store } from './redux/store'
 
 import Home from './Home/Home'
 import Quiz from './Quiz/Quiz'
@@ -12,13 +16,15 @@ const appRoutes = [
 function App() {
 
   return (
-    <Router>
-      <Routes>
-        {appRoutes.map((route, index) => (
-          <Route key={index} path={route.path} element={route.element} />
-        ))}
-      </Routes>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <Routes>
+          {appRoutes.map((route, index) => (
+            <Route key={index} path={route.path} element={route.element} />
+          ))}
+        </Routes>
+      </Router>
+    </Provider>
   )
 }
 
