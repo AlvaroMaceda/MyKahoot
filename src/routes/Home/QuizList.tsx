@@ -1,3 +1,5 @@
+import './QuizList.css'
+
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from 'react'
 
@@ -28,7 +30,7 @@ function QuizList() {
   return (
     <>
       { quizzes.length === 0 && !loading && !error && <div>No quizzes available</div>}
-      
+
       { quizzes.length > 0 &&  (
       <div>
         <h3 className="existing-tests-label">Haz uno de los tests ya existentes</h3>

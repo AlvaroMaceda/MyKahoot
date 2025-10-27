@@ -1,48 +1,4 @@
 
-
-
-
-
-
-.csv-label {
-  font-size: 1.18rem;
-  font-weight: 500;
-  margin-bottom: 10px;
-  color: #374151;
-}
-
-
-.csv-input {
-  display: block;
-  margin-bottom: 28px;
-  padding: 10px 14px;
-  border-radius: 10px;
-  border: 1.5px solid #c7d2fe;
-  font-size: 1.05rem;
-  background: #f1f5f9;
-  transition: border-color 0.2s;
-}
-.csv-input:focus {
-  border-color: #6366f1;
-  outline: none;
-}
-
-
-.existing-tests-label {
-  font-size: 1.13rem;
-  font-weight: 500;
-  margin-bottom: 18px;
-  color: #475569;
-}
-
-
-.tests-list {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-
 .test-card {
   display: flex;
   align-items: center;
@@ -59,7 +15,6 @@
   border-color: #6366f1;
 }
 
-
 .test-name {
   font-size: 1.08rem;
   font-weight: 500;
@@ -67,12 +22,10 @@
   flex: 1;
 }
 
-
 .test-actions {
   display: flex;
   gap: 12px;
 }
-
 
 .download-btn {
   background: linear-gradient(90deg, #6366f1 60%, #818cf8 100%);
@@ -91,7 +44,6 @@
   box-shadow: 0 4px 16px rgba(99, 102, 241, 0.18);
 }
 
-
 .delete-btn {
   background: #fff;
   border: 1.5px solid #f87171;
@@ -108,3 +60,4 @@
   background: #fee2e2;
   border-color: #ef4444;
 }
+

@@ -1,3 +1,5 @@
+import './QuizListItem.css'
+
 type QuizListItemProps = {
   id: string,
   name: string,

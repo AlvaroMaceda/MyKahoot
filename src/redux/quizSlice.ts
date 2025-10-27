@@ -10,7 +10,11 @@ export type AppState = {
 }
 
 const INITIAL_STATE: AppState = {
-  quizzes: [],
+  quizzes: [
+    { id: '1', name: 'Sample Quiz 1' },
+    { id: '2', name: 'Sample Quiz 2' },
+    { id: '3', name: 'Sample Quiz 3' }
+  ],
 }
 
 export const quizSlice = createSlice({

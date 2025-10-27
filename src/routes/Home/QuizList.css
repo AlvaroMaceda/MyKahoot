@@ -1,0 +1,19 @@
+
+.existing-tests-label {
+  font-size: 1.13rem;
+  font-weight: 500;
+  margin-bottom: 18px;
+  color: #475569;
+}
+
+.tests-list {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.error-message {
+  color: #dc2626;
+  font-weight: 500;
+  margin-top: 12px;
+}
