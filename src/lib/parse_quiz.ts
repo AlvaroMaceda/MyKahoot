@@ -1,4 +1,6 @@
+
 import type { QuizDetails } from "../types/quiz";
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default function parseCSVQuiz(csvContent: string): QuizDetails {
@@ -29,7 +31,7 @@ export default function parseCSVQuiz(csvContent: string): QuizDetails {
   })
 
   return {
-    id: '1',
+    id: uuidv4(),
     name: quizTitle,
     questions: questions,
   }

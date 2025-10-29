@@ -34,7 +34,7 @@ export class QuizRepository {
     await quizzesStore.put(quiz)
 
     for (const question of quiz.questions) {
-      questionsStore.put(question)
+      questionsStore.put({ ...question, quizId: quiz.id })
     }
 
     await tx.done
