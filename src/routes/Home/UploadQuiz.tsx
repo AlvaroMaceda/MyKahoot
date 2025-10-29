@@ -30,7 +30,6 @@ function UploadQuiz() {
         reader.onload = async (event) => {
           try {
             const content = event.target?.result
-            console.log(content)
             // Parse CSV quiz content
             const parsedQuiz = parseCSVQuiz(content as string)
             dispatch(setPreviewQuiz(parsedQuiz))

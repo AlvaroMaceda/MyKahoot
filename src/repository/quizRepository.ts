@@ -3,7 +3,9 @@ import type { IDBPDatabase } from 'idb'
 import type { Question, Quiz, QuizDetails } from '../types/quiz'
 
 export function upgrade(db: IDBPDatabase, oldVersion: number, _newVersion: number | null, _transaction: IDBPDatabase['transaction']) {
+  console.log(`Current DB version: ${oldVersion}`)
   if (oldVersion < 1) {
+    console.log('Upgrading database to version 1')
     db.createObjectStore('quizzes', { keyPath: 'id' })
     db.createObjectStore('questions', { keyPath: ['quizId', 'id'] }).createIndex('quizId', 'quizId', { unique: false })
   }
