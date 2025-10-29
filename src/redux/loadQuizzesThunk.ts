@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type { ActionReducerMapBuilder } from '@reduxjs/toolkit'
 import { QuizRepository } from '../repository/quizRepository'
-import { dbPromise } from '../repository/db'
+import { db } from '../repository/db'
 import type { AppState } from './quizSlice'
 import type { Quiz } from '../types/quiz'
 
-const quizRepository = new QuizRepository(dbPromise)
+const quizRepository = new QuizRepository(db)
 
 export const loadQuizzesThunk = createAsyncThunk(
   'quiz/loadQuizzes',
