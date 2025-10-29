@@ -6,7 +6,7 @@ function Quiz() {
   return (
     <div>
       <h1>Quiz Page for quiz ID: {id}</h1>
-      <h2>Question: {question ? question : "Quiz start"}</h2>
+      <h2>Question: {question ? question : 'Quiz start'}</h2>
     </div>
   )
 }

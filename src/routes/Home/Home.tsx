@@ -5,7 +5,7 @@ import UploadQuiz from './UploadQuiz'
 
 function Home() {
   return (
-    <div className="container">
+    <div className='container'>
       <UploadQuiz />
       <QuizList />
     </div>

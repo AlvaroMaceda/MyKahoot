@@ -1,5 +1,5 @@
-import React from "react"
-import "./Modal.css"
+import React from 'react'
+import './Modal.css'
 
 interface ModalProps {
   open: boolean
@@ -10,9 +10,9 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
   if (!open) return null
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="modal-close" onClick={onClose}>×</button>
+    <div className='modal-overlay'>
+      <div className='modal-content'>
+        <button className='modal-close' onClick={onClose}>×</button>
         {children}
       </div>
     </div>

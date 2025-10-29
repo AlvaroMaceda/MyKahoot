@@ -14,16 +14,16 @@ function QuizPreview() {
   const questions: Question[] = previewQuiz ? previewQuiz.questions : []
 
   return (
-    <div className="quizpreview-preview">
+    <div className='quizpreview-preview'>
       <h1>Quiz preview</h1>
-      <div className="quizpreview-name">{previewQuiz.name}</div>
-      <div className="quizpreview-questions">
+      <div className='quizpreview-name'>{previewQuiz.name}</div>
+      <div className='quizpreview-questions'>
         {questions.map((question, index) => <PreviewQuestion key={index} question={question} />)}
 
 
-        <div className="buttons">
-          <button className="quizpreview-confirm-btn">Confirmar</button>
-          <button className="quizpreview-cancel-btn">Cancelar</button>
+        <div className='buttons'>
+          <button className='quizpreview-confirm-btn'>Confirmar</button>
+          <button className='quizpreview-cancel-btn'>Cancelar</button>
         </div>
 
       </div>
