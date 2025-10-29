@@ -2,9 +2,13 @@ import './UploadQuiz.css'
 
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
-import Modal from '../../components/Modal'
 import type { AppDispatch } from '../../redux/store'
+import { useNavigate } from 'react-router-dom'
+
+import Modal from '../../components/Modal'
+import { setLoading, setError, setPreviewQuiz } from '../../redux/quizSlice'
+
+import parseCSVQuiz from '../../lib/parse_quiz'
 
 function UploadQuiz() {
   const navigate = useNavigate()
@@ -21,13 +25,24 @@ function UploadQuiz() {
   function handleProcessClick() {
     if (selectedFile) {
       const reader = new FileReader()
-      reader.onload = (event) => {
-        const content = event.target?.result
-        console.log(content)
-        // Go to preview page with content
-        navigate('/preview', { state: { csvContent: content } })
+      dispatch(setLoading(true))
+      try {
+        reader.onload = async (event) => {
+          const content = event.target?.result
+          console.log(content)
+          // Parse CSV quiz content
+          const parsedQuiz = parseCSVQuiz(content as string)
+          dispatch(setPreviewQuiz(parsedQuiz))
+          navigate('/preview', { state: { csvContent: content } })
+        }
+        reader.readAsText(selectedFile)
+
+      } catch (error) {
+        dispatch(setError(`Error parsing CSV file: ${error}`))
+
+      } finally {
+        dispatch(setLoading(false))
       }
-      reader.readAsText(selectedFile)
     }
   }
 
@@ -47,9 +62,14 @@ function UploadQuiz() {
       <Modal open={showHelp} onClose={() => setShowHelp(false)}>
         <div className='help-text'>
           <h3>Formato del fichero CSV</h3>
-          <p>El formato es un CSV separado por comas con las siguientes columnas, sin cabecera:</p>
+          <p>El formato es un CSV separado por comas con las siguientes columnas. La primera línea será el título:</p>
           <pre>
+            Título del test{'\n'}
             pregunta, respuesta_correcta, respuesta_incorrecta, respuesta_incorrecta, ...{'\n'}
+          </pre>
+          <p>Ejemplo:</p>
+          <pre>
+            Test de Geografía y Ciencia{'\n'}
             '¿Cuál es la capital de Francia?', 'París', 'Londres', 'Berlín', 'Madrid'{'\n'}
             '¿Cuánto es 2 + 2?', '4', '3', '5', '22', '55', '18'
           </pre>

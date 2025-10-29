@@ -62,12 +62,26 @@ export const quizSlice = createSlice({
   name: 'quiz',
   initialState: INITIAL_STATE,
   reducers: {
+    setLoading(state, action) {
+      state.loading = action.payload
+    },
+    setError(state, action) {
+      state.error = action.payload
+    },
+    setPreviewQuiz(state, action) {
+      state.previewQuiz = action.payload
+    }
   },
   extraReducers: (builder) => {
     loadQuizzesExtraReducers(builder)
   }
 })
 
+export const {
+  setLoading,
+  setError,
+  setPreviewQuiz
+} = quizSlice.actions
 
 export const selectQuizzes = (state: { quiz: AppState }) => state.quiz.quizzes
 export const selectLoading = (state: { quiz: AppState }) => state.quiz.loading
