@@ -1,0 +1,132 @@
+.quizpreview-preview h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #2563eb;
+  text-align: center;
+  margin-bottom: 18px;
+  letter-spacing: 1px;
+}
+/* QuizPreview.css - Style for the quiz preview page */
+
+
+.quizpreview-preview {
+  max-width: 700px;
+  margin: 40px auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
+  padding: 32px 24px;
+  font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.quizpreview-name {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #2d3748;
+  text-align: center;
+}
+
+.quizpreview-questions {
+  margin-top: 16px;
+}
+
+.quizpreview-question, .question {
+  background: #f7fafc;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  margin-bottom: 20px;
+  padding: 18px 16px;
+}
+
+.quizpreview-question-text, .question-text {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #374151;
+}
+
+.quizpreview-options {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  align-items: stretch;
+}
+
+.quizpreview-option {
+  background: #e2e8f0;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  color: #2d3748;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  word-break: break-word;
+}
+.quizpreview-option.correct {
+  background: #38a169;
+  color: #fff;
+}
+.quizpreview-option:not(.correct):hover {
+  background: #cbd5e1;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 24px;
+}
+.quizpreview-confirm-btn {
+  background: #3182ce;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.quizpreview-confirm-btn:hover {
+  background: #2563eb;
+}
+.quizpreview-cancel-btn {
+  background: #e53e3e;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.quizpreview-cancel-btn:hover {
+  background: #c53030;
+}
+.incorrect-answer {
+  color: #e53e3e;
+}
+
+.back-btn {
+  display: inline-block;
+  background: #3182ce;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 16px;
+  transition: background 0.2s;
+}
+
+.back-btn:hover {
+  background: #2563eb;
+}

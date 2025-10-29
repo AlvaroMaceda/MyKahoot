@@ -1,14 +1,14 @@
-import React from "react";
-import "./Modal.css";
+import React from "react"
+import "./Modal.css"
 
 interface ModalProps {
-  open: boolean;
-  onClose: () => void;
-  children: React.ReactNode;
+  open: boolean
+  onClose: () => void
+  children: React.ReactNode
 }
 
 const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
-  if (!open) return null;
+  if (!open) return null
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -16,7 +16,7 @@ const Modal: React.FC<ModalProps> = ({ open, onClose, children }) => {
         {children}
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Modal;
+export default Modal

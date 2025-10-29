@@ -7,7 +7,7 @@ export type Question = {
   id: string
   text: string
   options: string[]
-  correctOptionIndex: number
+  correctOption: number
 }
 
 export type QuizDetails = {

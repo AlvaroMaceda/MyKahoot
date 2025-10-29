@@ -1,24 +1,29 @@
-import { useState } from "react";
-import Modal from "../../components/Modal";
-import './UploadQuiz.css';
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
+import Modal from "../../components/Modal"
+import './UploadQuiz.css'
 
 function UploadQuiz() {
+  const navigate = useNavigate()
+
   const [showHelp, setShowHelp] = useState(false)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0] || null;
-    setSelectedFile(file);
+    const file = event.target.files?.[0] || null
+    setSelectedFile(file)
   }
 
   function handleProcessClick() {
     if (selectedFile) {
-      const reader = new FileReader();
+      const reader = new FileReader()
       reader.onload = (event) => {
-        const content = event.target?.result;
-        console.log(content);
-      };
-      reader.readAsText(selectedFile);
+        const content = event.target?.result
+        console.log(content)
+        // Go to preview page with content
+        navigate('/preview', { state: { csvContent: content } })
+      }
+      reader.readAsText(selectedFile)
     }
   }
 
@@ -47,7 +52,7 @@ function UploadQuiz() {
         </div>
       </Modal>
     </div>
-  );
+  )
 }
 
 export default UploadQuiz
