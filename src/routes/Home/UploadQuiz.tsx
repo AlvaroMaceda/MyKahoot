@@ -28,12 +28,18 @@ function UploadQuiz() {
       dispatch(setLoading(true))
       try {
         reader.onload = async (event) => {
-          const content = event.target?.result
-          console.log(content)
-          // Parse CSV quiz content
-          const parsedQuiz = parseCSVQuiz(content as string)
-          dispatch(setPreviewQuiz(parsedQuiz))
-          navigate('/preview', { state: { csvContent: content } })
+          try {
+            const content = event.target?.result
+            console.log(content)
+            // Parse CSV quiz content
+            const parsedQuiz = parseCSVQuiz(content as string)
+            dispatch(setPreviewQuiz(parsedQuiz))
+            navigate('/preview', { state: { csvContent: content } })
+          } catch (error) {
+            dispatch(setError(`Error parsing CSV file: ${error}`))
+          } finally {
+            dispatch(setLoading(false))
+          }
         }
         reader.readAsText(selectedFile)
 
