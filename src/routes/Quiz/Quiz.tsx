@@ -1,5 +1,6 @@
-import type { QuizDetails } from "../../types/quiz";
+import './Quiz.css'
 
+import type { QuizDetails } from "../../types/quiz";
 
 type QuizProps = {
   quiz: QuizDetails;

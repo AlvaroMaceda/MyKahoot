@@ -23,6 +23,7 @@ function QuizPage() {
 
   const [quiz, setQuiz] = useState<QuizDetails | null>(null)
   const [loading, setLoading] = useState(true)
+  const [found, setFound] = useState(true)
 
   useEffect(() => {
     async function fetchQuiz() {
@@ -32,10 +33,12 @@ function QuizPage() {
         const data = await quizRepository.getById(id as TestId)
         if (!data) {
           setLoading(false)
+          setFound(false)
           setError('Quiz not found')
           return
         }
-        await delay(3000) // Simulate network delay
+        setFound(true)
+        await delay(0) // Simulate network delay
         setQuiz(data)
 
       } catch (_error) {
@@ -48,11 +51,17 @@ function QuizPage() {
   }, [id])
 
   return (
-    <div className='quiz-container'>
+    <>
       <Loading visible={loading} />
 
       {!loading && quiz && <Quiz quiz={quiz} />}
-    </div>
+
+      {!loading && !found &&
+        <div className='quizpage-notfound'>
+          Quiz not found
+        </div>
+      }
+    </>
   )
 
 }
