@@ -13,6 +13,9 @@ import Loading from '../../components/Loading'
 import type { TestId } from '../../types/quiz'
 import { QuizRepository } from '../../repository/quizRepository'
 import { db } from '../../repository/db'
+import { quizToCSV } from '../../lib/download_quiz'
+
+const quizRepository = new QuizRepository(db)
 
 function QuizList() {
   const dispatch = useDispatch<AppDispatch>()
@@ -38,38 +41,50 @@ function QuizList() {
 
   function deleteTest(id: TestId) {
     if (!window.confirm('Are you sure you want to delete this test?')) return
-    const quizRepository = new QuizRepository(db)
     quizRepository.delete(id)
     dispatch(loadQuizzesThunk())
   }
 
-  function downloadTest(id: TestId) {
-    console.log(`Download test with id: ${id}`)
+  async function downloadTest(id: TestId) {
+    const quiz = await quizRepository.getById(id)
+    if (!quiz) return
+
+    const downloadData = quizToCSV(quiz)
+    // Create a Blob and trigger download
+    const blob = new Blob([downloadData], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = `${quiz.name}.csv`
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
   }
 
   return (
     <>
-      { quizzes.length === 0 && !loading && !error && <div>No quizzes available</div>}
+      {quizzes.length === 0 && !loading && !error && <div>No quizzes available</div>}
 
-      { quizzes.length > 0 &&  (
-      <div>
-        <h3 className='existing-tests-label'>Haz uno de los tests ya existentes</h3>
-        <div className='tests-list'>
-          {quizzes.map(test => (
-            <QuizListItem key={test.id}
-              id={test.id}
-              name={test.name}
-              onDelete={deleteTest}
-              onDownload={downloadTest}
-              onStart={startTest}
-            />
-          ))}
+      {quizzes.length > 0 && (
+        <div>
+          <h3 className='existing-tests-label'>Haz uno de los tests ya existentes</h3>
+          <div className='tests-list'>
+            {quizzes.map(test => (
+              <QuizListItem key={test.id}
+                id={test.id}
+                name={test.name}
+                onDelete={deleteTest}
+                onDownload={downloadTest}
+                onStart={startTest}
+              />
+            ))}
+          </div>
         </div>
-      </div>
       )}
 
       <Loading visible={!!loading} />
-      { error && <div className='error-message'>{error}</div> }
+      {error && <div className='error-message'>{error}</div>}
     </>
   )
 }
