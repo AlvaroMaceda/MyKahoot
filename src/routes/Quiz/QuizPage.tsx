@@ -5,7 +5,7 @@ import { QuizRepository } from '../../repository/quizRepository'
 
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import type { QuizDetails, TestId } from '../../types/quiz'
+import type { QuizData, TestId } from '../../types/quiz'
 
 import Loading from '../../components/Loading'
 import { setError } from '../../redux/quizSlice'
@@ -21,7 +21,7 @@ function delay(ms: number) {
 function QuizPage() {
   const { id } = useParams<{ id: string; question?: string }>()
 
-  const [quiz, setQuiz] = useState<QuizDetails | null>(null)
+  const [quiz, setQuiz] = useState<QuizData | null>(null)
   const [loading, setLoading] = useState(true)
   const [found, setFound] = useState(true)
 

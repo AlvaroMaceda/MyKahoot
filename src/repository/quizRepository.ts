@@ -1,6 +1,6 @@
 
 import type { IDBPDatabase } from 'idb'
-import type { Question, Quiz, QuizDetails } from '../types/quiz'
+import type { Question, QuizId, QuizData } from '../types/quiz'
 
 export function upgrade(db: IDBPDatabase, oldVersion: number, _newVersion: number | null, _transaction: IDBPDatabase['transaction']) {
   console.log(`Current DB version: ${oldVersion}`)
@@ -29,7 +29,7 @@ export class QuizRepository {
     }
   }
 
-  async add(quiz: QuizDetails) {
+  async add(quiz: QuizData) {
     const { tx, quizzesStore, questionsStore } = this.getTransaction()
     await quizzesStore.put(quiz)
 
@@ -40,7 +40,7 @@ export class QuizRepository {
     await tx.done
   }
 
-  async getById(quizId: string): Promise<QuizDetails | undefined> {
+  async getById(quizId: string): Promise<QuizData | undefined> {
     return this.db.transaction(['quizzes', 'questions']).objectStore('quizzes').get(quizId).then(async (quiz) => {
       if (!quiz) return undefined
 
@@ -49,15 +49,15 @@ export class QuizRepository {
     })
   }
 
-  async getAll(): Promise<Quiz[]> {
+  async getAll(): Promise<QuizId[]> {
     const quizzes = await this.db.getAll('quizzes')
-    const response: QuizDetails[] = []
+    const response: QuizData[] = []
 
     for (const quiz of quizzes) {
       const questions: Question[] = await this.db.getAllFromIndex('questions', 'quizId', quiz.id)
 
       quiz.questions = questions
-      response.push(quiz as QuizDetails)
+      response.push(quiz as QuizData)
     }
     return response
   }

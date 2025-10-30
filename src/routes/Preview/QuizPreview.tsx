@@ -5,19 +5,19 @@ import { useNavigate } from 'react-router-dom'
 
 import { selectPreviewQuiz } from '../../redux/quizSlice'
 import PreviewQuestion from './PreviewQuestion'
-import type { Question, QuizDetails } from '../../types/quiz'
+import type { Question, QuizData } from '../../types/quiz'
 import { db } from '../../repository/db'
 import saveQuiz from '../../lib/save_quiz'
 
 function QuizPreview() {
   const navigate = useNavigate()
 
-  const previewQuiz: QuizDetails | undefined = useSelector(selectPreviewQuiz)
+  const previewQuiz: QuizData | undefined = useSelector(selectPreviewQuiz)
   if (!previewQuiz) {
     return <div>No preview quiz available</div>
   }
 
-  const quiz: QuizDetails = previewQuiz
+  const quiz: QuizData = previewQuiz
   async function handleSave() {
     await saveQuiz(db, quiz)
     navigate('/')

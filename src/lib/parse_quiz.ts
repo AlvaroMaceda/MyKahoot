@@ -1,9 +1,9 @@
 
-import type { QuizDetails } from "../types/quiz";
+import type { QuizData } from "../types/quiz";
 import { v4 as uuidv4 } from 'uuid';
 
 
-export default function parseCSVQuiz(csvContent: string): QuizDetails {
+export default function parseCSVQuiz(csvContent: string): QuizData {
   const lines = csvContent.split('\n').map(line => line.trim()).filter(line => line.length > 0)
   if (lines.length < 2) {
     throw new Error('CSV content is too short. Must have at least a title and one question.')

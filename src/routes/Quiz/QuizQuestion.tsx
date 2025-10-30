@@ -1,24 +1,29 @@
-import type { Question } from '../../types/quiz'
+import type { QuestionWithAnswer } from '../../types/quiz'
 import QuizOption from './QuizOption'
 
 interface QuizQuestionProps {
-  question: Question
-  onNext?: () => void
+  index: number
+  question: QuestionWithAnswer
+  onAnswer?: (questionIndex: number, answerIndex: number) => void
 }
 
-function QuizQuestion({ question, onNext }: QuizQuestionProps) {
+function QuizQuestion({ index, question, onAnswer }: QuizQuestionProps) {
 
   const correctOption = question.correctOption
-
-  function handleOptionClick(selectedIndex: number) {
-  }
+  const userAnswer = question.answer
 
   return (
     <div className='quiz-question'>
       <div className='quiz-question-text'>{question.text}</div>
       <div className='quiz-options'>
-        {question.options.map((option, index) => (
-          <QuizOption key={index} text={option} onClick={() => handleOptionClick(index)} />
+        {question.options.map((option, answerIndex) => (
+          <QuizOption
+            key={answerIndex}
+            text={option}
+            correct={answerIndex === correctOption}
+            showAnswer={userAnswer == answerIndex}
+            onClick={() => onAnswer?.(index, answerIndex)}
+          />
         ))}
       </div>
     </div>

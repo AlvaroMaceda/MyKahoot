@@ -1,12 +1,3 @@
-.quiz-preview h1 {
-  font-size: 2.2rem;
-  font-weight: 800;
-  color: #2563eb;
-  text-align: center;
-  margin-bottom: 18px;
-  letter-spacing: 1px;
-}
-/* QuizPreview.css - Style for the quiz preview page */
 
 
 .quiz-container {
@@ -75,40 +66,6 @@
   background: #cbd5e1;
 }
 
-.buttons {
-  display: flex;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 24px;
-}
-.quiz-confirm-btn {
-  background: #3182ce;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 24px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.quiz-confirm-btn:hover {
-  background: #2563eb;
-}
-.quiz-cancel-btn {
-  background: #e53e3e;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 24px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-.quiz-cancel-btn:hover {
-  background: #c53030;
-}
 .incorrect-answer {
   color: #e53e3e;
 }

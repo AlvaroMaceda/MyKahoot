@@ -1,6 +1,6 @@
 export type TestId = string
 
-export type Quiz = {
+export type QuizId = {
   id: TestId
   name: string
 }
@@ -12,7 +12,11 @@ export type Question = {
   correctOption: number
 }
 
-export type QuizDetails = {
+export type QuestionWithAnswer = Question & {
+  answer?: number
+}
+
+export type QuizData = {
   id: TestId
   name: string
   questions: Question[]

@@ -3,7 +3,7 @@ import type { ActionReducerMapBuilder } from '@reduxjs/toolkit'
 import { QuizRepository } from '../repository/quizRepository'
 import { db } from '../repository/db'
 import type { AppState } from './quizSlice'
-import type { Quiz } from '../types/quiz'
+import type { QuizId } from '../types/quiz'
 
 const quizRepository = new QuizRepository(db)
 
@@ -32,7 +32,7 @@ export const loadQuizzesExtraReducers = (builder: ActionReducerMapBuilder<AppSta
     })
     .addCase(loadQuizzesThunk.fulfilled, (state, action) => {
       state.loading = false
-      const quizzes = action.payload as Quiz[]
+      const quizzes = action.payload as QuizId[]
       state.quizzes = quizzes
     })
     .addCase(loadQuizzesThunk.rejected, (state, action) => {
