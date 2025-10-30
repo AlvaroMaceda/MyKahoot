@@ -1,17 +1,24 @@
 import type { Question } from '../../types/quiz'
-import PreviewOption from './QuizOption'
+import QuizOption from './QuizOption'
 
 interface QuizQuestionProps {
   question: Question
+  onNext?: () => void
 }
 
-function QuizQuestion({ question }: QuizQuestionProps) {
+function QuizQuestion({ question, onNext }: QuizQuestionProps) {
+
+  const correctOption = question.correctOption
+
+  function handleOptionClick(selectedIndex: number) {
+  }
+
   return (
-    <div className='quizpreview-question'>
-      <div className='quizpreview-question-text'>{question.text}</div>
-      <div className='quizpreview-options'>
+    <div className='quiz-question'>
+      <div className='quiz-question-text'>{question.text}</div>
+      <div className='quiz-options'>
         {question.options.map((option, index) => (
-          <PreviewOption key={index} text={option} />
+          <QuizOption key={index} text={option} onClick={() => handleOptionClick(index)} />
         ))}
       </div>
     </div>

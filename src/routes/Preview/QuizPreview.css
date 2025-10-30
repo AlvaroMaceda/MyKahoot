@@ -112,21 +112,3 @@
 .incorrect-answer {
   color: #e53e3e;
 }
-
-.back-btn {
-  display: inline-block;
-  background: #3182ce;
-  color: #fff;
-  border: none;
-  border-radius: 6px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  font-weight: 500;
-  cursor: pointer;
-  margin-top: 16px;
-  transition: background 0.2s;
-}
-
-.back-btn:hover {
-  background: #2563eb;
-}
