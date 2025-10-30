@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
 
+import Layout from './components/Layout'
 import Home from './routes/Home/Home'
 import Quiz from './routes/Quiz/Quiz'
 import QuizPreview from './routes/Preview/QuizPreview'
@@ -17,6 +18,7 @@ function App() {
 
   return (
     <Provider store={store}>
+      <Layout>
       <Router>
         <Routes>
           {appRoutes.map((route, index) => (
@@ -24,6 +26,7 @@ function App() {
           ))}
         </Routes>
       </Router>
+      </Layout>
     </Provider>
   )
 }

@@ -18,9 +18,9 @@ function QuizPreview() {
   }
 
   const quiz: QuizDetails = previewQuiz
-  function handleSave() {
-    saveQuiz(db, quiz)
-    console.log('Quiz guardado')
+  async function handleSave() {
+    await saveQuiz(db, quiz)
+    
   }
 
   function handleCancel() {
