@@ -20,7 +20,7 @@ function QuizPreview() {
   const quiz: QuizDetails = previewQuiz
   async function handleSave() {
     await saveQuiz(db, quiz)
-    
+    navigate('/')
   }
 
   function handleCancel() {
