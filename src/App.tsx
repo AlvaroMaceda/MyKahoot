@@ -5,12 +5,12 @@ import { store } from './redux/store'
 
 import Layout from './components/Layout'
 import Home from './routes/Home/Home'
-import Quiz from './routes/Quiz/Quiz'
+import QuizPage from './routes/Quiz/QuizPage'
 import QuizPreview from './routes/Preview/QuizPreview'
 
 const appRoutes = [
   { path: '/', element: <Home /> },
-  { path: '/quiz/:id/:question?', element: <Quiz /> },
+  { path: '/quiz/:id/:question?', element: <QuizPage /> },
   { path: '/preview', element: <QuizPreview /> },
 ]
 

@@ -22,7 +22,7 @@ export default defineConfig([
     },
     rules: {
       '@typescript-eslint/no-unused-vars': [
-        'warn',
+        'off',
         {
           argsIgnorePattern: '^_',
           varsIgnorePattern: '^_',

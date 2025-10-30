@@ -9,7 +9,7 @@ interface LayoutProps {
 function Layout({ children }: LayoutProps): JSX.Element {
 
   return (
-    <div className="app-layout">
+    <div className='app-layout'>
       <header>
         <h2>MyKahoot</h2>
         {/* Add navigation/menu here */}

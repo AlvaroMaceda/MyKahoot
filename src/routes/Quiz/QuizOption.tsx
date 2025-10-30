@@ -1,5 +1,5 @@
 interface QuizOptionProps {
-  text: string;
+  text: string
 }
 
 function QuizOption({ text }: QuizOptionProps) {
