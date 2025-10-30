@@ -10,6 +10,9 @@ import { loadQuizzesThunk } from '../../redux/loadQuizzesThunk'
 import type { AppDispatch } from '../../redux/store'
 
 import Loading from '../../components/Loading'
+import type { TestId } from '../../types/quiz'
+import { QuizRepository } from '../../repository/quizRepository'
+import { db } from '../../repository/db'
 
 function QuizList() {
   const dispatch = useDispatch<AppDispatch>()
@@ -29,15 +32,18 @@ function QuizList() {
   const loading = useSelector(selectLoading)
   const error = useSelector(selectError)
 
-  function startTest(id: string) {
+  function startTest(id: TestId) {
     navigate(`/quiz/${id}`)
   }
 
-  function deleteTest(id: string) {
-    console.log(`Delete test with id: ${id}`)
+  function deleteTest(id: TestId) {
+    if (!window.confirm('Are you sure you want to delete this test?')) return
+    const quizRepository = new QuizRepository(db)
+    quizRepository.delete(id)
+    dispatch(loadQuizzesThunk())
   }
 
-  function downloadTest(id: string) {
+  function downloadTest(id: TestId) {
     console.log(`Download test with id: ${id}`)
   }
 
