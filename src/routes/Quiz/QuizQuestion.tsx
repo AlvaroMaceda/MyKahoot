@@ -16,15 +16,24 @@ function QuizQuestion({ index, question, onAnswer }: QuizQuestionProps) {
     <div className='quiz-question'>
       <div className='quiz-question-text'>{question.text}</div>
       <div className='quiz-options'>
-        {question.options.map((option, answerIndex) => (
-          <QuizOption
-            key={answerIndex}
-            text={option}
-            correct={answerIndex === correctOption}
-            showAnswer={userAnswer == answerIndex}
-            onClick={() => onAnswer?.(index, answerIndex)}
-          />
-        ))}
+        {question.options.map((option, answerIndex) => {
+
+          const answered = userAnswer !== undefined
+          const isCorrect = answerIndex === correctOption
+          const isUserAnswer = userAnswer === answerIndex
+          const showAnswer = answered && (isCorrect || isUserAnswer)
+
+          return (
+            <QuizOption
+              key={answerIndex}
+              text={option}
+              correct={isCorrect}
+              showAnswer={showAnswer}
+              isUserAnswer={isUserAnswer}
+              onClick={() => onAnswer?.(index, answerIndex)}
+            />
+          )
+        })}
       </div>
     </div>
   )

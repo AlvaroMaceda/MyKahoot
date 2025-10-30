@@ -11,8 +11,7 @@ function Layout({ children }: LayoutProps): JSX.Element {
   return (
     <div className='app-layout'>
       <header>
-        <h2>MyKahoot</h2>
-        {/* Add navigation/menu here */}
+        <h2><a href="/">MyKahoot</a></h2>
       </header>
       <main>
         {children}

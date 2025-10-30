@@ -7,11 +7,13 @@ import Layout from './components/Layout'
 import Home from './routes/Home/Home'
 import QuizPage from './routes/Quiz/QuizPage'
 import QuizPreview from './routes/Preview/QuizPreview'
+import NotFound from './routes/404/NotFound'
 
 const appRoutes = [
   { path: '/', element: <Home /> },
   { path: '/quiz/:id/:question?', element: <QuizPage /> },
   { path: '/preview', element: <QuizPreview /> },
+  { path: '*', element: <NotFound /> },
 ]
 
 function App() {

@@ -2,6 +2,7 @@ import './Quiz.css'
 
 import { useState } from 'react'
 import type { QuestionWithAnswer, QuizData } from "../../types/quiz"
+import { useNavigate } from 'react-router'
 
 import QuizQuestion from './QuizQuestion'
 
@@ -9,19 +10,16 @@ type QuizProps = {
   quiz: QuizData
 }
 
-
-
-
 function Quiz({ quiz }: QuizProps) {
+  const navigate = useNavigate()
 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const questions: QuestionWithAnswer[] = quiz.questions.map(q => ({ ...q, answer: undefined }))
+  const [questions, setQuestions] = useState<QuestionWithAnswer[]>(quiz.questions.map(q => ({ ...q, answer: undefined })))
+
   const currentQuestion = questions[currentIndex]
-  console.log('Rendering Quiz')
-  console.log(currentQuestion)
 
   function nextQuestion() {
-    if (currentIndex < quiz.questions.length - 1) {
+    if (currentIndex < questions.length - 1) {
       setCurrentIndex(currentIndex + 1)
     }
   }
@@ -33,11 +31,17 @@ function Quiz({ quiz }: QuizProps) {
   }
 
   function finishQuiz() {
-    console.log('Quiz finished', questions)
+    navigate(`/`)
   }
 
   function questionAnswered(questionIndex: number, answerIndex: number) {
+
+    const question = questions[questionIndex]
+    if(!question) return
+    if(question.answer !== undefined) return // already answered
+
     questions[questionIndex].answer = answerIndex
+    setQuestions([...questions])
   }
 
   const atFirstQuestion = currentIndex === 0
@@ -49,11 +53,13 @@ function Quiz({ quiz }: QuizProps) {
       <h1 className='quiz-name'>{quiz.name}</h1>
 
       <div className='quiz-content'>
-        <QuizQuestion
-          index={currentIndex}
-          question={questions[currentIndex]}
-          onAnswer={questionAnswered}
-        />
+        {currentQuestion && // Only render if currentQuestion is defined
+          <QuizQuestion
+            index={currentIndex}
+            question={questions[currentIndex]}
+            onAnswer={questionAnswered}
+          />
+        }
       </div>
 
       <div className='quiz-buttons'>
@@ -70,8 +76,8 @@ function Quiz({ quiz }: QuizProps) {
         </div>
 
         <button className='quiz-btn quiz-finishbutton'
-            onClick={finishQuiz}>
-            Finish
+          onClick={finishQuiz}>
+          Finish
         </button>
 
       </div>

@@ -2,19 +2,22 @@ interface QuizOptionProps {
   text: string
   correct?: boolean
   showAnswer?: boolean
+  isUserAnswer?: boolean
   onClick?: () => void
 }
 
-function QuizOption({ text, correct, showAnswer, onClick }: QuizOptionProps) {
+function QuizOption({ text, correct, showAnswer, isUserAnswer, onClick }: QuizOptionProps) {
 
   const optionClass = showAnswer
     ? correct
-      ? 'quiz-option-correct'
-      : 'quiz-option-incorrect'
+      ? 'correct'
+      : 'incorrect'
     : ''
 
+  const userAnswerClass = isUserAnswer ? 'user-answer' : ''
+
   return (
-    <div className={`quiz-option ${optionClass}`} onClick={onClick}>
+    <div className={`quiz-option ${optionClass} ${userAnswerClass}`} onClick={onClick}>
       {text}
     </div>
   )
