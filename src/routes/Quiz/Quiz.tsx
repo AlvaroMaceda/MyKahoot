@@ -10,11 +10,50 @@ type QuizProps = {
   quiz: QuizData
 }
 
+function randomizeQuestions(questions: QuizData['questions']): QuizData['questions'] {
+  // Simple Fisher-Yates shuffle
+  const shuffled = [...questions]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  return shuffled
+}
+
+function randomizeOptions(options: string[], correctOptionIndex: number): { options: string[], newCorrectOptionIndex: number } {
+  const optionPairs = options.map((option, index) => ({ option, index }))
+  // Shuffle options
+  for (let i = optionPairs.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[optionPairs[i], optionPairs[j]] = [optionPairs[j], optionPairs[i]]
+  }
+  const newOptions = optionPairs.map(pair => pair.option)
+  const newCorrectOptionIndex = optionPairs.findIndex(pair => pair.index === correctOptionIndex)
+  return { options: newOptions, newCorrectOptionIndex }
+}
+
+function prepareQuestions(quiz: QuizData): QuestionWithAnswer[] {
+  const questionsWithRandomOptions = quiz.questions.map(question => {
+    const { options, newCorrectOptionIndex } = randomizeOptions(question.options, question.correctOption)
+    return {
+      ...question,
+      options,
+      correctOption: newCorrectOptionIndex,
+      answer: undefined
+    }
+  })
+
+  const randomizedQuestions = randomizeQuestions(questionsWithRandomOptions)
+  return randomizedQuestions
+}
+
+
 function Quiz({ quiz }: QuizProps) {
   const navigate = useNavigate()
 
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [questions, setQuestions] = useState<QuestionWithAnswer[]>(quiz.questions.map(q => ({ ...q, answer: undefined })))
+  // const [questions, setQuestions] = useState<QuestionWithAnswer[]>(quiz.questions.map(q => ({ ...q, answer: undefined })))
+  const [questions, setQuestions] = useState<QuestionWithAnswer[]>(prepareQuestions(quiz))
 
   const currentQuestion = questions[currentIndex]
 
