@@ -5,9 +5,37 @@
 }
 header, footer {
   background: #eee;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 main {
   flex: 1;
-  padding: 1rem;
+  padding: 1rem 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .app-layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  header, footer, main {
+    padding: 0.5rem 1rem;
+  }
+  h2 {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  header, footer, main {
+    padding: 0.5rem 0.5rem;
+  }
+  h2 {
+    font-size: 1rem;
+  }
 }

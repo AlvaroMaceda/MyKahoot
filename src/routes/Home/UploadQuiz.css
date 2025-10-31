@@ -3,12 +3,40 @@
   align-items: center;
   gap: 1rem;
   margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .csv-label {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
   display: block;
+}
+
+@media (max-width: 600px) {
+  #upload-quiz-container {
+    padding: 0.5rem;
+    min-width: 0;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100vw;
+  }
+  .upload {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  .process-btn,
+  .help-btn {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    font-size: 1rem;
+  }
+  .csv-input {
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
 }
 
 .csv-input {
@@ -64,4 +92,27 @@
 .help-btn:focus {
   background: #1565c0;
   transform: translateY(-2px) scale(1.05);
+}
+
+.csv-input-hidden {
+  display: none;
+}
+
+.csv-input-label {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: #fafafa;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #333;
+  margin-bottom: 0;
+  transition: border-color 0.2s;
+  min-width: 180px;
+  box-sizing: border-box;
+}
+.csv-input-label:hover,
+.csv-input-label:focus {
+  border-color: #6366f1;
 }

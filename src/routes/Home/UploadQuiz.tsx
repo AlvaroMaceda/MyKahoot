@@ -16,10 +16,12 @@ function UploadQuiz() {
 
   const [showHelp, setShowHelp] = useState(false)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [fileName, setFileName] = useState("")
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] || null
     setSelectedFile(file)
+    setFileName(file ? file.name : "")
   }
 
   function handleProcessClick() {
@@ -56,11 +58,15 @@ function UploadQuiz() {
       <h2 className='csv-label'>Sube un fichero CSV</h2>
       <div className='upload'>
         <input
-          className='csv-input'
+          id='csv-input-hidden'
           type='file'
           accept='.csv'
           onChange={handleFileChange}
+          style={{ display: 'none' }}
         />
+        <label htmlFor='csv-input-hidden' className='csv-input-label'>
+          {fileName ? `Archivo: ${fileName}` : 'Selecciona un archivo...'}
+        </label>
         <button className='process-btn' onClick={handleProcessClick}>Procesar</button>
         <button className='help-btn' onClick={() => setShowHelp(true)}>formato</button>
       </div>
