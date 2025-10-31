@@ -82,8 +82,17 @@ function UploadQuiz() {
           <pre>
             Test de Geografía y Ciencia{'\n'}
             "¿Cuál es la capital de Francia?", "París", "Londres", "Berlín", "Madrid"{'\n'}
-            "¿Cuánto es 2 + 2?", "4", "3", "5", "22", "55", "18"
+            "¿Cuánto es 2 + 2?","4","3","5","22","55","18"
           </pre>
+          <ul>
+            <li>La primera línea contiene el título del test</li>
+            <li>Cada línea siguiente representa una pregunta</li>
+            <li>La primera columna es el texto de la pregunta</li>
+            <li>La segunda columna es la respuesta correcta</li>
+            <li>Las columnas siguientes son las respuestas incorrectas (al menos una)</li>
+            <li>Las comillas dobles son obligatorias para textos que contienen comas</li>
+            <li>No debes dejar espacios alrededor de las comas que separan las preguntas</li>
+          </ul>
         </div>
       </Modal>
     </div>

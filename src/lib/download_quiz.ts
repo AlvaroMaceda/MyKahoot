@@ -1,5 +1,5 @@
 import type { Question, QuizData } from "../types/quiz"
-import Papa from 'papaparse';
+import Papa from 'papaparse'
 
 function quizToCSV(quiz: QuizData): string {
   const rows: string[][] = [];
@@ -18,7 +18,11 @@ function quizToCSV(quiz: QuizData): string {
     rows.push(line);
   });
 
-  return Papa.unparse(rows, { delimiter: "," });
+  return Papa.unparse(rows, {
+    delimiter: ',',
+    quotes: true,
+    newline: '\n',
+  });
 }
 
 export { quizToCSV }

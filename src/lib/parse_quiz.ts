@@ -1,7 +1,6 @@
-
-import type { QuizData } from "../types/quiz";
 import { v4 as uuidv4 } from 'uuid';
 import Papa from 'papaparse';
+import type { QuizData } from '../types/quiz';
 
 export default function parseCSVQuiz(csvContent: string): QuizData {
   const result = Papa.parse<string[]>(csvContent, {
