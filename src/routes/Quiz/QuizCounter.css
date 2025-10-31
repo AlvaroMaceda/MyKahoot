@@ -1,0 +1,25 @@
+.quiz-counter {
+  display: flex;
+  gap: 1rem;
+  font-size: 1.2rem;
+  margin: 1rem 0;
+  align-items: center;
+}
+
+
+.quiz-counter__right {
+  color: #2ecc40;
+  font-weight: bold;
+}
+
+
+.quiz-counter__wrong {
+  color: #ff4136;
+  font-weight: bold;
+}
+
+.quiz-counter__total {
+  margin-left: auto;
+  color: #0074d9;
+  font-weight: bold;
+}

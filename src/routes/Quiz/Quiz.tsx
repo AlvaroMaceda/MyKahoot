@@ -1,4 +1,6 @@
+
 import './Quiz.css'
+import QuizCounter from './QuizCounter'
 
 import { useState } from 'react'
 import type { QuestionWithAnswer, QuizData } from "../../types/quiz"
@@ -90,6 +92,13 @@ function Quiz({ quiz }: QuizProps) {
     <div className='quiz-container'>
 
       <h1 className='quiz-name'>{quiz.name}</h1>
+
+        {/* QuizCounter: show total right and wrong answers */}
+        <QuizCounter
+          totalRight={questions.filter(q => q.answer !== undefined && q.answer === q.correctOption).length}
+          totalWrong={questions.filter(q => q.answer !== undefined && q.answer !== q.correctOption).length}
+          totalQuestions={questions.length}
+        />
 
       <div className='quiz-content'>
         {currentQuestion && // Only render if currentQuestion is defined
