@@ -57,6 +57,7 @@
   display: flex;
   align-items: center;
   word-break: break-word;
+  user-select: none;
 }
 .quiz-option.correct.user-answer {
   background: #38a169;

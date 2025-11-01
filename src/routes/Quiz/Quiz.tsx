@@ -12,25 +12,26 @@ type QuizProps = {
   quiz: QuizData
 }
 
-function randomizeQuestions(questions: QuizData['questions']): QuizData['questions'] {
-  // Simple Fisher-Yates shuffle
-  const shuffled = [...questions]
+
+// Fisher-Yates shuffle algorithm
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array]
   for (let i = shuffled.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+    const j = Math.floor(Math.random() * (i + 1)); // This ; is necessary to avoid ASI issues with the next line
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
   }
   return shuffled
 }
 
+function randomizeQuestions(questions: QuizData['questions']): QuizData['questions'] {
+  return shuffleArray(questions)
+}
+
 function randomizeOptions(options: string[], correctOptionIndex: number): { options: string[], newCorrectOptionIndex: number } {
   const optionPairs = options.map((option, index) => ({ option, index }))
-  // Shuffle options
-  for (let i = optionPairs.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[optionPairs[i], optionPairs[j]] = [optionPairs[j], optionPairs[i]]
-  }
-  const newOptions = optionPairs.map(pair => pair.option)
-  const newCorrectOptionIndex = optionPairs.findIndex(pair => pair.index === correctOptionIndex)
+  const shuffledPairs = shuffleArray(optionPairs)
+  const newOptions = shuffledPairs.map(pair => pair.option)
+  const newCorrectOptionIndex = shuffledPairs.findIndex(pair => pair.index === correctOptionIndex)
   return { options: newOptions, newCorrectOptionIndex }
 }
 
@@ -98,6 +99,7 @@ function Quiz({ quiz }: QuizProps) {
           totalRight={questions.filter(q => q.answer !== undefined && q.answer === q.correctOption).length}
           totalWrong={questions.filter(q => q.answer !== undefined && q.answer !== q.correctOption).length}
           totalQuestions={questions.length}
+          currentQuestion={currentIndex}
         />
 
       <div className='quiz-content'>

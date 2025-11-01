@@ -72,8 +72,12 @@ function UploadQuiz() {
       </div>
       <Modal open={showHelp} onClose={() => setShowHelp(false)}>
         <div className='help-text'>
+          <em>Este texto con el formato es apto para LLMs</em>
           <h3>Formato del fichero CSV</h3>
-          <p>El formato es un CSV separado por comas, con comillas dobles, con las siguientes columnas. La primera línea será el título:</p>
+          <p>El formato es un CSV separado por comas, con comillas dobles, con las siguientes columnas.
+            La primera línea será el título. Cada pregunta está en una línea diferente.
+            Las preguntas pueden tener un número variable de respuestas, pero al menos siempre dos:</p>
+
           <pre>
             Título del test{'\n'}
             pregunta, respuesta_correcta, respuesta_incorrecta, respuesta_incorrecta, ...{'\n'}

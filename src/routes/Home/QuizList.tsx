@@ -40,7 +40,7 @@ function QuizList() {
   }
 
   function deleteTest(id: TestId) {
-    if (!window.confirm('Are you sure you want to delete this test?')) return
+    if (!window.confirm('¿Seguro que quieres eliminar este test?')) return
     quizRepository.delete(id)
     dispatch(loadQuizzesThunk())
   }
@@ -64,7 +64,7 @@ function QuizList() {
 
   return (
     <>
-      {quizzes.length === 0 && !loading && !error && <div>No quizzes available</div>}
+      {quizzes.length === 0 && !loading && !error && <div>No hay tests disponibles</div>}
 
       {quizzes.length > 0 && (
         <div>

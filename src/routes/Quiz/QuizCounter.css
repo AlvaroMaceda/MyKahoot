@@ -1,3 +1,18 @@
+.quiz-counter__right-text {
+  display: inline;
+}
+.quiz-counter__wrong-text {
+  display: inline;
+}
+
+@media (max-width: 600px) {
+  .quiz-counter__right-text {
+    display: none;
+  }
+  .quiz-counter__wrong-text {
+    display: none;
+  }
+}
 .quiz-counter {
   display: flex;
   gap: 1rem;
@@ -6,12 +21,10 @@
   align-items: center;
 }
 
-
 .quiz-counter__right {
   color: #2ecc40;
   font-weight: bold;
 }
-
 
 .quiz-counter__wrong {
   color: #ff4136;
