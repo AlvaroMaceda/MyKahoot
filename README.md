@@ -1,73 +1,44 @@
-# React + TypeScript + Vite
+# MyKahoot
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## What is this project?
 
-Currently, two official plugins are available:
+MyKahoot is a web application designed to create, upload, preview, and play quizzes. The quizzes are stored locally in your browser's local storage. This app does not need a backend server, making it easy to use and maintain.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+You can generate a test using a LLM and upload it as a CSV file to interactively answer the questions.
 
-## React Compiler
+## Test format
+The test format is a CSV file with the following structure:
+- The first row contains the quiz title (no headers).
+- Each subsequent row represents a question. The format is:
+	- First column: question text
+	- Second column: correct answer
+	- Remaining columns: incorrect answers (one or more)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Example:
+```csv
+Trivia General
+"¿Cuál es el planeta más grande del sistema solar?","Júpiter","Marte","Saturno","Venus"
+"¿Quién escribió "Cien años de soledad"?","Gabriel García Márquez","Mario Vargas Llosa","Isabel Allende","Julio Cortázar"
+"¿En qué año llegó el hombre a la Luna?","1969","1959","1975","1981"
+"¿Cuál es el símbolo químico del oro?","Au","Ag","O","Fe"
+"¿Qué país tiene la mayor población del mundo?","China","India","Estados Unidos","Brasil"
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+The correct answer is always the second column. The app will randomize the order of options when displaying questions.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Getting Started
+1. Install dependencies:
+	 ```bash
+	 yarn install
+	 ```
+2. Run the development server:
+	 ```bash
+	 yarn dev
+	 ```
+3. Build for production:
+	 ```bash
+	 yarn build
+	 ```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## License
+This project is open source under the infinite recursion license. See the LICENSE file for details.
