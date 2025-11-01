@@ -15,43 +15,40 @@ function UploadQuiz() {
   const dispatch = useDispatch<AppDispatch>()
 
   const [showHelp, setShowHelp] = useState(false)
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [fileName, setFileName] = useState("")
 
   function handleFileChange(event: React.ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0] || null
-    setSelectedFile(file)
     setFileName(file ? file.name : "")
+    loadFile(file as File)
   }
 
-  function handleProcessClick() {
-    if (selectedFile) {
-      const reader = new FileReader()
-      dispatch(setLoading(true))
-      try {
-        reader.onload = async (event) => {
-          try {
-            const content = event.target?.result
-            // Parse CSV quiz content
-            const parsedQuiz = parseCSVQuiz(content as string)
-            dispatch(setPreviewQuiz(parsedQuiz))
-            navigate('/preview', { state: { csvContent: content } })
-          } catch (error) {
-            dispatch(setError(`Error parsing CSV file: ${error}`))
-          } finally {
-            dispatch(setLoading(false))
-          }
-        }
-        reader.readAsText(selectedFile)
+  function loadFile(file: File) {
+    const reader = new FileReader()
 
+    reader.onloadstart = () => {
+      dispatch(setLoading(true))
+    }
+
+    reader.onload = async (event) => {
+      try {
+        const content = event.target?.result
+        // Parse CSV quiz content
+        const parsedQuiz = parseCSVQuiz(content as string)
+        dispatch(setPreviewQuiz(parsedQuiz))
+        navigate('/preview', { state: { csvContent: content } })
       } catch (error) {
         dispatch(setError(`Error parsing CSV file: ${error}`))
-
-      } finally {
-        dispatch(setLoading(false))
       }
     }
+
+    reader.onloadend = () => {
+      dispatch(setLoading(false))
+    }
+
+    reader.readAsText(file)
   }
+
 
   return (
     <div id='upload-quiz-container'>
@@ -67,7 +64,6 @@ function UploadQuiz() {
         <label htmlFor='csv-input-hidden' className='csv-input-label'>
           {fileName ? `Archivo: ${fileName}` : 'Selecciona un archivo...'}
         </label>
-        <button className='process-btn' onClick={handleProcessClick}>Procesar</button>
         <button className='help-btn' onClick={() => setShowHelp(true)}>formato</button>
       </div>
       <Modal open={showHelp} onClose={() => setShowHelp(false)}>

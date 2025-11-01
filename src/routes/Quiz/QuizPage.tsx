@@ -13,11 +13,6 @@ import Quiz from './Quiz'
 
 const quizRepository = new QuizRepository(db)
 
-
-function delay(ms: number) {
-  return new Promise(resolve => setTimeout(resolve, ms))
-}
-
 function QuizPage() {
   const { id } = useParams<{ id: string; question?: string }>()
 
@@ -38,7 +33,6 @@ function QuizPage() {
           return
         }
         setFound(true)
-        await delay(0) // Simulate network delay
         setQuiz(data)
 
       } catch (_error) {
