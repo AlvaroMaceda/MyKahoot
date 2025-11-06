@@ -41,4 +41,4 @@ The correct answer is always the second column. The app will randomize the order
 	 ```
 
 ## License
-This project is open source under the infinite recursion license. See the LICENSE file for details.
+This project is open source under the stack overflow license. See the LICENSE file for details.
