@@ -34,14 +34,12 @@ function QuizPreview() {
       <h1>Quiz preview</h1>
       <div className='quizpreview-name'>{previewQuiz.name}</div>
       <div className='quizpreview-questions'>
-        {questions.map((question, index) => <PreviewQuestion key={index} question={question} />)}
-
-
         <div className='buttons'>
-          <button className='quizpreview-confirm-btn' onClick={handleSave}>Confirmar</button>
+          <button className='quizpreview-confirm-btn' onClick={handleSave}>Añadir</button>
           <button className='quizpreview-cancel-btn' onClick={handleCancel}>Cancelar</button>
         </div>
 
+        {questions.map((question, index) => <PreviewQuestion key={index} question={question} />)}
       </div>
 
     </div>

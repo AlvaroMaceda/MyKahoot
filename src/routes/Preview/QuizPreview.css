@@ -91,6 +91,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  min-width: 140px;
+  flex: 1 1 0;
 }
 .quizpreview-confirm-btn:hover {
   background: #2563eb;
@@ -105,6 +107,8 @@
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
+  min-width: 140px;
+  flex: 1 1 0;
 }
 .quizpreview-cancel-btn:hover {
   background: #c53030;
