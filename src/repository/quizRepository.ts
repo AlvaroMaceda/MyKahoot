@@ -18,7 +18,11 @@ export class QuizRepository {
   }
 
   async add(quiz: QuizData) {
-    this.db.put('quizzes', quiz)
+    // Get all quizzes to determine the highest order
+    const quizzes: QuizData[] = await this.db.getAll('quizzes')
+    const maxOrder = quizzes.length > 0 ? Math.max(...quizzes.map(q => q.order ?? 0)) : 0
+    const quizToSave = { ...quiz, order: maxOrder + 1 }
+    await this.db.put('quizzes', quizToSave)
   }
 
   async getById(quizId: string): Promise<QuizData | undefined> {
@@ -26,15 +30,34 @@ export class QuizRepository {
   }
 
   async getAll(): Promise<QuizId[]> {
-    const quizzes = await this.db.getAll('quizzes')
+    const quizzes: QuizData[] = await this.db.getAll('quizzes')
+    // Sort by order descending
+    quizzes.sort((a, b) => (b.order ?? 0) - (a.order ?? 0))
     return quizzes.map((quiz) => ({
       id: quiz.id,
-      name: quiz.name
+      name: quiz.name,
+      order: quiz.order ?? 0
     }))
   }
 
   async delete(quizId: string) {
-    this.db.delete('quizzes', quizId)
+    await this.db.delete('quizzes', quizId)
+  }
+
+  // Reorder quizzes: move quiz with quizId to new position (0-based)
+  async reorder(quizId: string, newPosition: number) {
+    const quizzes: QuizData[] = await this.db.getAll('quizzes')
+    // Sort by order descending
+    quizzes.sort((a, b) => (b.order ?? 0) - (a.order ?? 0))
+    const idx = quizzes.findIndex(q => q.id === quizId)
+    if (idx === -1 || newPosition < 0 || newPosition >= quizzes.length) return
+    const [moved] = quizzes.splice(idx, 1)
+    quizzes.splice(newPosition, 0, moved)
+    // Reassign order: highest order for first
+    quizzes.forEach((quiz, i) => {
+      quiz.order = quizzes.length - i
+      this.db.put('quizzes', quiz)
+    })
   }
 }
 

@@ -62,6 +62,12 @@ function QuizList() {
     URL.revokeObjectURL(url)
   }
 
+  // Move quiz to a new position
+  async function moveQuiz(id: TestId, newPosition: number) {
+    await quizRepository.reorder(id, newPosition)
+    dispatch(loadQuizzesThunk())
+  }
+
   return (
     <>
       {quizzes.length === 0 && !loading && !error && <div>No hay tests disponibles</div>}
@@ -70,13 +76,17 @@ function QuizList() {
         <div>
           <h3 className='existing-tests-label'>Haz uno de los tests ya existentes</h3>
           <div className='tests-list'>
-            {quizzes.map(test => (
-              <QuizListItem key={test.id}
+            {quizzes.map((test, idx) => (
+              <QuizListItem
+                key={test.id}
                 id={test.id}
                 name={test.name}
+                order={test.order}
                 onDelete={deleteTest}
                 onDownload={downloadTest}
                 onStart={startTest}
+                onMoveUp={idx > 0 ? () => moveQuiz(test.id, idx - 1) : undefined}
+                onMoveDown={idx < quizzes.length - 1 ? () => moveQuiz(test.id, idx + 1) : undefined}
               />
             ))}
           </div>

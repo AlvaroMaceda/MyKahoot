@@ -3,6 +3,7 @@ export type TestId = string
 export type QuizId = {
   id: TestId
   name: string
+  order: number
 }
 
 export type Question = {
@@ -20,4 +21,5 @@ export type QuizData = {
   id: TestId
   name: string
   questions: Question[]
+  order: number
 }
