@@ -2,12 +2,29 @@
 import type { IDBPDatabase } from 'idb'
 import type { QuizId, QuizData } from '../types/quiz'
 
-export function upgrade(db: IDBPDatabase, oldVersion: number, _newVersion: number | null, _transaction: IDBPDatabase['transaction']) {
+export async function upgrade(db: IDBPDatabase, oldVersion: number, _newVersion: number | null, _transaction: IDBPDatabase['transaction']) {
   console.log(`Current DB version: ${oldVersion}`)
   if (oldVersion < 1) {
     console.log('Upgrading database to version 1')
     db.createObjectStore('quizzes', { keyPath: 'id' })
   }
+  // Migration: assign 'order' property to all quizzes if missing
+  const tx = db.transaction('quizzes', 'readwrite')
+  const store = tx.objectStore('quizzes')
+  const allQuizzes = await store.getAll()
+  let changed = false
+  allQuizzes.forEach((quiz: QuizData, idx: number) => {
+    if (typeof quiz.order !== 'number') {
+      quiz.order = allQuizzes.length - idx
+      store.put(quiz)
+      changed = true
+    }
+  })
+  if (changed) {
+    await tx.done
+    console.log('Migrated quizzes to add order property')
+  }
+// ...existing code...
 }
 
 export class QuizRepository {
